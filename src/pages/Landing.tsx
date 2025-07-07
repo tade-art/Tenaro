@@ -1,13 +1,23 @@
+import About from '../components/About';
+import CTA from '../components/CTA';
 import Features from '../components/Features';
 import Footer from '../components/Footer';
 import Hero from '../components/Hero';
+import HowItWorks from '../components/HowItWorks';
+import Navbar from '../components/Navbar';
 
 export default function Landing() {
   return (
-    <main className="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
+    <main className="bg-[var(--color-bg)] text-[var(--color-text)]">
+      <Navbar />
       <Hero />
-      <div className="border-t border-gray-200 dark:border-gray-800" />
+      <div className="section-divider" />
+      <About />
+      <div className="section-divider" />
       <Features />
+      <div className="section-divider" />
+      <HowItWorks />
+      <CTA />
       <Footer />
     </main>
   );
