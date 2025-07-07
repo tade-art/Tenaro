@@ -8,10 +8,51 @@
     --color-text: #1a1a1a;
     --color-accent: #f97316; /* orange-500 */
     --color-accent-hover: #ea580c; /* orange-600 */
+    --color-accent-bg: #fff7ed; /* orange-50 */
   }
 
   .btn-primary {
-    @apply inline-block px-8 py-3 text-white font-semibold text-lg rounded-xl shadow-md transition-transform bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] hover:scale-105;
+    @apply inline-block px-8 py-3 text-white font-semibold text-lg rounded-xl shadow-md transition bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] focus:outline-none focus:ring-2 focus:ring-orange-300;
+  }
+
+  .btn-secondary {
+    @apply inline-block px-8 py-3 text-[var(--color-text)] font-semibold text-lg rounded-xl shadow-md transition bg-white hover:bg-orange-100 border border-gray-300;
+  }
+
+  .btn-nav {
+    @apply inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-[var(--color-text)] transition rounded-none hover:bg-orange-100 focus:outline-none focus:ring-2 focus:ring-orange-300;
+  }
+
+   .hero-wrapper {
+    @apply relative min-h-[95vh] flex items-center justify-center px-8 bg-gradient-to-br from-orange-50 via-white to-orange-100 overflow-hidden;
+  }
+
+  .hero-content {
+    @apply flex flex-col items-start justify-center gap-6 max-w-lg z-10;
+  }
+
+  .hero-heading {
+    @apply heading-xl;
+  }
+
+  .hero-subheading {
+    @apply text-sm font-semibold text-orange-500 uppercase tracking-wide;
+  }
+
+  .hero-description {
+    @apply text-lg-muted;
+  }
+
+  .hero-image {
+    @apply w-80 h-80 z-10;
+  }
+
+  .blur-circle-left {
+    @apply absolute w-96 h-96 bg-orange-100 rounded-full opacity-50 blur-3xl -top-20 -left-20;
+  }
+
+  .blur-circle-right {
+    @apply absolute w-80 h-80 bg-orange-200 rounded-full opacity-30 blur-2xl top-10 -right-20;
   }
 
   .section-wrapper {
@@ -22,12 +63,16 @@
     @apply text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-tight text-[var(--color-text)];
   }
 
+  .heading-2xl {
+    @apply text-3xl font-bold text-[var(--color-text)];
+  }
+
   .text-lg-muted {
     @apply mt-6 max-w-2xl text-lg md:text-xl text-gray-700;
   }
 
   .feature-card {
-    @apply text-left;
+    @apply text-left bg-[var(--color-accent-bg)] rounded-xl p-6 shadow-sm border border-orange-100 transition hover:shadow-md hover:scale-[1.02] hover:animate-bounceY;
   }
 
   .feature-title {
@@ -44,5 +89,9 @@
 
   .section-subheading {
     @apply text-sm uppercase tracking-wide font-semibold text-orange-500;
+  }
+
+  .footer {
+    @apply py-8 text-sm text-center text-gray-500;
   }
 }

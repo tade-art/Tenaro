@@ -1,10 +1,10 @@
-import About from '../components/About';
-import CTA from '../components/CTA';
-import Features from '../components/Features';
 import Footer from '../components/Footer';
-import Hero from '../components/Hero';
-import HowItWorks from '../components/HowItWorks';
 import Navbar from '../components/Navbar';
+import About from '../components/public/About';
+import CTA from '../components/public/CTA';
+import Features from '../components/public/Features';
+import Hero from '../components/public/Hero';
+import HowItWorks from '../components/public/HowItWorks';
 
 export default function Landing() {
   return (
@@ -13,10 +13,10 @@ export default function Landing() {
       <Hero />
       <div className="section-divider" />
       <About />
-      <div className="section-divider" />
       <Features />
       <div className="section-divider" />
       <HowItWorks />
+      <div className="section-divider" />
       <CTA />
       <Footer />
     </main>

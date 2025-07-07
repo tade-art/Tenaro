@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import featureList from '../data/features';
+import featureList from '../../data/features';
 
 export default function Features() {
   return (
@@ -11,7 +11,7 @@ export default function Features() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: idx * 0.2 }}
           viewport={{ once: true }}
-          className="feature-card"
+          className="feature-card rounded-xl p-6 shadow-md border border-gray-100"
         >
           <h3 className="feature-title">{feature.title}</h3>
           <p className="feature-desc">{feature.desc}</p>
