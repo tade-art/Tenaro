@@ -10,11 +10,11 @@ export default function Navbar() {
         </Link>
 
         <div className="inline-flex overflow-hidden rounded-md border border-gray-300 bg-white shadow-sm">
-          <Link to="/login" className="btn-nav border-r border-gray-300">
+          <Link to="/auth" className="btn-nav border-r border-gray-300">
             <ArrowRightIcon className="h-4 w-4" />
             Log In
           </Link>
-          <Link to="/signup" className="btn-nav">
+          <Link to="/auth" className="btn-nav">
             <UserIcon className="h-4 w-4" />
             Sign Up
           </Link>

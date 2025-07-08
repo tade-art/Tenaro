@@ -4,7 +4,7 @@ import Navbar from '../PublicNavbar';
 
 export default function NavAndFooter({ children }: { children: React.ReactNode }) {
     const location = useLocation();
-    const hide = ['/login','/signup']
+    const hide = ['/auth']
     const showNav = !hide.includes(location.pathname)
 
   return (
