@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import featureList from '../../data/features';
+import featureList from '../../../data/features';
 
 export default function Features() {
   return (

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import img from '../../images/note.svg';
+import img from '../../../images/note.svg';
 
 export default function Hero() {
   return (

@@ -1,7 +1,9 @@
-import Footer from '../components/Footer';
+import Layout from '../components/layouts/NavAndFooter';
 
 export default function SignUp(){
     return(
-        <Footer/>
+        <Layout>
+            <div></div>
+        </Layout>
     );
 }

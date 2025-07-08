@@ -1,16 +1,9 @@
+@import './tokens.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer components {
-  :root {
-    --color-bg: #ffffff;
-    --color-text: #1a1a1a;
-    --color-accent: #f97316; /* orange-500 */
-    --color-accent-hover: #ea580c; /* orange-600 */
-    --color-accent-bg: #fff7ed; /* orange-50 */
-  }
-
   .btn-primary {
     @apply inline-block px-8 py-3 text-white font-semibold text-lg rounded-xl shadow-md transition bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] focus:outline-none focus:ring-2 focus:ring-orange-300;
   }
@@ -36,7 +29,7 @@
   }
 
   .hero-subheading {
-    @apply text-sm font-semibold text-orange-500 uppercase tracking-wide;
+    @apply text-sm font-semibold text-[var(--color-accent)] uppercase tracking-wide;
   }
 
   .hero-description {
@@ -88,7 +81,7 @@
   }
 
   .section-subheading {
-    @apply text-sm uppercase tracking-wide font-semibold text-orange-500;
+    @apply text-sm uppercase tracking-wide font-semibold text-[var(--color-accent)] ;
   }
 
   .footer {

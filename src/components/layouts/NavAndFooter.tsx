@@ -1,10 +1,15 @@
+import { useLocation } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Navbar from '../PublicNavbar';
 
 export default function NavAndFooter({ children }: { children: React.ReactNode }) {
+    const location = useLocation();
+    const hide = ['/login','/signup']
+    const showNav = !hide.includes(location.pathname)
+
   return (
     <>
-      <Navbar />
+      {showNav && <Navbar />}
       <main className="flex-grow">{children}</main>
       <Footer />
     </>

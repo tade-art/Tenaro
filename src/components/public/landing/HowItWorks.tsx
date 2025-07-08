@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import stepList from '../../data/steps';
+import stepList from '../../../data/steps';
 
 export default function HowItWorks() {
   return (

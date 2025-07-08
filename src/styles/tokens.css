@@ -1,0 +1,9 @@
+@layer base {
+  :root {
+    --color-bg: #ffffff;
+    --color-text: #1a1a1a;
+    --color-accent: #f97316;        /* orange-500 */
+    --color-accent-hover: #ea580c;  /* orange-600 */
+    --color-accent-bg: #fff7ed;     /* orange-50 */
+  }
+}
