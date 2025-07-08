@@ -16,7 +16,7 @@ export default function CTA() {
       <p className="text-gray-700 mb-6">
         Start managing your time and tasks with clarity and confidence.
       </p>
-      <Link to="/auth" className="btn-secondary bg-white border-none">
+      <Link to="/signup" className="btn-secondary bg-white border-none">
         Create Your Account
       </Link>
     </motion.section>
