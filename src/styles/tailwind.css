@@ -87,4 +87,8 @@
   .footer {
     @apply py-8 text-sm text-center text-gray-500;
   }
+
+  .auth-box {
+  @apply w-full max-w-md bg-white p-8 rounded-xl shadow-md border border-gray-200;
+}
 }
