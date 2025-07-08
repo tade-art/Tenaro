@@ -17,6 +17,7 @@ export default function Landing() {
         <HowItWorks />
         <div className="section-divider" />
         <CTA />
+        <div className="mb-12" />
       </Layout>
     </main>
   );
