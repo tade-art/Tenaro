@@ -1,7 +1,7 @@
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import Toast from '../../Toast';
+import Toast from '../../general/Toast';
 
 interface SignupFormProps {
   setTab: (tab: 'login' | 'signup') => void;

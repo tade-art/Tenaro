@@ -6,4 +6,11 @@
     --color-accent-hover: #ea580c;  /* orange-600 */
     --color-accent-bg: #fff7ed;     /* orange-50 */
   }
+   [data-theme="dark"] {
+    --color-bg: #1a1a1a;
+    --color-text: #ffffff;
+    --color-accent: #f97316;
+    --color-accent-hover: #ea580c;
+    --color-accent-bg: #2d2d2d;
+  }
 }
