@@ -3,7 +3,11 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Toast from '../../Toast';
 
-export default function SignupForm() {
+interface SignupFormProps {
+  setTab: (tab: 'login' | 'signup') => void;
+}
+
+export default function SignupForm({ setTab }: SignupFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,6 +27,7 @@ export default function SignupForm() {
 
       if (res.ok) {
         setToast({ message: data.message || 'Signup successful', type: 'success' });
+        setTimeout(() => {setToast(null); setTab('login'); }, 1000);
       } else {
         setToast({ message: data.message || 'Signup failed', type: 'error' });
       }

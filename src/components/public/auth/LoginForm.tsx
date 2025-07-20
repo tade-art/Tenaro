@@ -1,6 +1,7 @@
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Toast from '../../Toast';
 
 export default function LoginForm() {
@@ -8,6 +9,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [toast, setToast] = useState<{ message: string, type: 'success' | 'error' } | null>(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,6 +25,7 @@ export default function LoginForm() {
 
       if (res.ok) {
         setToast({ message: data.message || 'Signup successful', type: 'success' });
+        setTimeout(() => navigate('/private/homepage'), 1000);
       } else {
         setToast({ message: data.message || 'Signup failed', type: 'error' });
       }

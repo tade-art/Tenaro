@@ -1,4 +1,4 @@
-export default function AuthTabs() {
+export default function homepage() {
 
   return (
     <div>

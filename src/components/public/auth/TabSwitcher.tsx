@@ -1,9 +1,9 @@
-interface Props {
+export interface TabProps {
   tab: 'login' | 'signup';
   setTab: (tab: 'login' | 'signup') => void;
 }
 
-export default function TabSwitcher({ tab, setTab }: Props) {
+export default function TabSwitcher({ tab, setTab }: TabProps) {
   return (
     <div className="flex justify-center mb-6 gap-2">
       <button

@@ -22,7 +22,7 @@ export default function AuthTabs() {
 
         <AuthTabSwitcher tab={tab} setTab={setTab} />
         <AnimatePresence mode="wait">
-          {tab === 'login' ? <LoginForm key="login" /> : <SignupForm key="signup" />}
+          {tab === 'signup' && <SignupForm setTab={setTab} /> ? <SignupForm setTab={setTab} /> : <LoginForm key="login" />}
         </AnimatePresence>
       </div>
     </NavFooter>
