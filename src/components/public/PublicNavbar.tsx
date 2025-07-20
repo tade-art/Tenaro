@@ -1,5 +1,6 @@
 import { ArrowRightIcon, UserIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
+import ThemeToggle from '../general/ThemeToggle';
 
 export default function Navbar() {
   return (
@@ -18,6 +19,7 @@ export default function Navbar() {
             <UserIcon className="h-4 w-4" />
             Sign Up
           </Link>
+          <ThemeToggle/>
         </div>
       </nav>
     </header>
