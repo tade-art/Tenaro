@@ -1,6 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Landing from './Landing';
-import Auth from './UserAuth';
+import Landing from './public/Landing';
+import Auth from './public/UserAuth';
 
 function App() {
   return (

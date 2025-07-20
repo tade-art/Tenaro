@@ -1,10 +1,10 @@
 import { AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import NavFooter from '../components/layouts/NavAndFooter';
-import LoginForm from '../components/public/auth/LoginForm';
-import SignupForm from '../components/public/auth/SignupForm';
-import AuthTabSwitcher from '../components/public/auth/TabSwitcher';
+import NavFooter from '../../components/layouts/NavAndFooter';
+import LoginForm from '../../components/public/auth/LoginForm';
+import SignupForm from '../../components/public/auth/SignupForm';
+import AuthTabSwitcher from '../../components/public/auth/TabSwitcher';
 
 export default function AuthTabs() {
   const [tab, setTab] = useState<'login' | 'signup'>('login');

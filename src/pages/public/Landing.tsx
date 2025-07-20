@@ -1,9 +1,9 @@
-import Layout from '../components/layouts/NavAndFooter';
-import About from '../components/public/landing/About';
-import CTA from '../components/public/landing/CTA';
-import Features from '../components/public/landing/Features';
-import Hero from '../components/public/landing/Hero';
-import HowItWorks from '../components/public/landing/HowItWorks';
+import Layout from '../../components/layouts/NavAndFooter';
+import About from '../../components/public/landing/About';
+import CTA from '../../components/public/landing/CTA';
+import Features from '../../components/public/landing/Features';
+import Hero from '../../components/public/landing/Hero';
+import HowItWorks from '../../components/public/landing/HowItWorks';
 
 export default function Landing() {
   return (

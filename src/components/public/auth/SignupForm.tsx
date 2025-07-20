@@ -1,12 +1,13 @@
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import Toast from '../../Toast';
 
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [status, setStatus] = useState<string | null>(null);
+  const [toast, setToast] = useState<{ message: string, type: 'success' | 'error' } | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,13 +22,13 @@ export default function SignupForm() {
       const data = await res.json();
 
       if (res.ok) {
-        console.log(`Success: ${data.message}`);
+        setToast({ message: data.message || 'Signup successful', type: 'success' });
       } else {
-        console.log(`Error: ${data.message}`);
+        setToast({ message: data.message || 'Signup failed', type: 'error' });
       }
     } catch (err) {
       console.error(err);
-      setStatus('Network error');
+      setToast({ message: 'Network Error', type: 'error' });
     }
   };
 
@@ -75,7 +76,13 @@ export default function SignupForm() {
 
       <button type="submit" className="w-full btn-primary">Sign Up</button>
 
-      {status && <p>{status}</p>}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </motion.form>
   );
 }
