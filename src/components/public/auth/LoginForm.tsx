@@ -25,7 +25,7 @@ export default function LoginForm() {
 
       if (res.ok) {
         setToast({ message: data.message || 'Signup successful', type: 'success' });
-        setTimeout(() => navigate('/private/home'), 1000);
+        setTimeout(() => navigate('/private/start'), 1000);
       } else {
         setToast({ message: data.message || 'Signup failed', type: 'error' });
       }
