@@ -9,7 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/auth" element={<Auth />} />
-        <Route path="/private/homepage" element={<PrivHome />} />
+        <Route path="/private/home" element={<PrivHome />} />
       </Routes>
     </Router>
   );
