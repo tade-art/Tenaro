@@ -2,6 +2,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import StartPage from './private/Start';
 import Landing from './public/Landing';
 import Auth from './public/UserAuth';
+import RouteProtection from '../components/general/RouteProtection'
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/auth" element={<Auth />} />
-        <Route path="/private/start" element={<StartPage />} />
+        <Route path="/private/start" element={<RouteProtection><StartPage /> </RouteProtection>} />
       </Routes>
     </Router>
   );
