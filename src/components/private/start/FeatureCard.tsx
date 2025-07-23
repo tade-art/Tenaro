@@ -7,24 +7,19 @@ const icons = {
   analytics: <BarChart2 size={28} />,
 };
 
-export default function FeatureCard({
-  title,
-  description,
-  link,
-  icon,
-}: {
-  title: string;
-  description: string;
-  link: string;
-  icon: 'tasks' | 'timer' | 'analytics';
-}) {
+export default function FeatureCard({ icon, title, description, link }) {
   return (
-    <div className="feature-card">
-      <div className="mb-3 text-[var(--color-accent)]">{icons[icon]}</div>
-      <h3 className="feature-title">{title}</h3>
-      <p className="feature-desc mb-4">{description}</p>
-      <Link to={link} className="inline-block mt-auto btn-secondary text-sm">
-        Go to {title.split(' ')[0]}
+    <div className="rounded-2xl p-6 bg-[var(--color-card-bg)] border border-[var(--color-border)] shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-200 flex flex-col justify-between">
+      <div>
+        <div className="mb-4 text-[var(--color-accent)]">{icons[icon]}</div>
+        <h3 className="text-2xl font-semibold mb-2 text-[var(--color-text)]">{title}</h3>
+        <p className="text-[var(--color-subtle-text)] text-sm leading-relaxed">{description}</p>
+      </div>
+      <Link
+        to={link}
+        className="mt-6 inline-block text-sm text-[var(--color-accent)] hover:underline"
+      >
+        Learn more →
       </Link>
     </div>
   );
