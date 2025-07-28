@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import Navbar from '../../components/general/Navbar';
 import SettingsModal from '../../components/private/settings/SettingsModal';
@@ -16,41 +16,65 @@ export default function TasksPage() {
   const [filter, setFilter] = useState<'All' | 'Completed' | 'Incomplete'>('All');
   const [sort, setSort] = useState<'Title' | 'Priority'>('Title');
   const [showSettings, setShowSettings] = useState(false);
+  const didInitRef = useRef(false); 
 
-  const handleAdd = (taskData: Omit<Task, 'id' | 'completed'>) => {
+  useEffect(() => {
+    if (didInitRef.current) return;
+    didInitRef.current = true;
+    try {
+      const raw = localStorage.getItem('tasks');
+      const parsed = raw ? JSON.parse(raw) : [];
+      if (Array.isArray(parsed)) {
+        const cleaned = parsed.filter(t => t && t.id && t.title && t.priority);
+        setTasks(cleaned);
+      }
+    } catch (err) {
+      console.error('[DEBUG] Failed to load tasks:', err);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
+
+  const handleAdd = (data: Omit<Task, 'id' | 'completed'>) => {
     const newTask: Task = {
-      ...taskData,
+      ...data,
       id: uuid(),
       completed: false,
     };
-    setTasks([...tasks, newTask]);
+    setTasks(prev => [...prev, newTask]);
+    setShowModal(false);
   };
 
-  const handleEdit = (updatedTask: Task) => {
-    setTasks(tasks.map((t) => (t.id === updatedTask.id ? updatedTask : t)));
+  const handleEdit = (updated: Task) => {
+    setTasks(prev => prev.map(t => (t.id === updated.id ? updated : t)));
     setEditTask(null);
   };
 
   const handleDelete = (id: string) => {
-    setTasks(tasks.filter((t) => t.id !== id));
+    setTasks(prev => prev.filter(t => t.id !== id));
   };
 
   const handleToggleComplete = (id: string) => {
-    setTasks(tasks.map((t) => t.id === id ? { ...t, completed: !t.completed } : t));
+    setTasks(prev =>
+      prev.map(task =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
   };
 
-  const filteredTasks = tasks.filter((t) => {
-    if (filter === 'Completed') return t.completed;
-    if (filter === 'Incomplete') return !t.completed;
-    return true;
-  });
+  const filteredTasks = tasks.filter(task =>
+    filter === 'All' ? true :
+    filter === 'Completed' ? task.completed :
+    !task.completed
+  );
 
-  const sortedTasks = [...filteredTasks].sort((a, b) => {
-    if (sort === 'Priority') {
-      return priorityOrder[a.priority] - priorityOrder[b.priority];
-    }
-    return a.title.localeCompare(b.title);
-  });
+  const sortedTasks = [...filteredTasks].sort((a, b) =>
+    sort === 'Priority'
+      ? priorityOrder[a.priority] - priorityOrder[b.priority]
+      : a.title.localeCompare(b.title)
+  );
 
   return (
     <>
