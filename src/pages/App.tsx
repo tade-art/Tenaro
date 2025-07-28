@@ -1,8 +1,9 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import RouteProtection from '../components/general/RouteProtection';
 import StartPage from './private/Start';
+import Tasks from './private/Tasks';
 import Landing from './public/Landing';
 import Auth from './public/UserAuth';
-import RouteProtection from '../components/general/RouteProtection'
 
 function App() {
   return (
@@ -10,7 +11,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/auth" element={<Auth />} />
-        <Route path="/private/start" element={<RouteProtection><StartPage /> </RouteProtection>} />
+        <Route path="/start" element={<RouteProtection><StartPage /> </RouteProtection>} />
+        <Route path="/tasks" element={<RouteProtection><Tasks /> </RouteProtection>} />
       </Routes>
     </Router>
   );

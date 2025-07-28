@@ -17,7 +17,7 @@ export default function Navbar({ onSettingsClick }: NavbarProps) {
   return (
     <aside className="w-64 fixed inset-y-0 left-0 bg-[var(--color-card-bg)] border-r border-[var(--color-border)] p-4 flex flex-col justify-between">
       <div>
-        <Link to="/" className="group text-center text-2xl font-bold mb-6 block">
+        <Link to="/start" className="group text-center text-2xl font-bold mb-6 block">
             <span className="inline-block relative text-[var(--color-text)] hover:text-[var(--color-accent-hover)]">
               Tenaro
               <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
