@@ -26,6 +26,9 @@ export default function LoginForm() {
       if (res.ok) {
         setToast({ message: data.message || 'Signup successful', type: 'success' });
         localStorage.setItem('token', data.token);
+        localStorage.setItem('id',data.user.id);
+        console.log("user id", localStorage.getItem('id'));
+        console.log("user token", localStorage.getItem('token'));
         setTimeout(() => navigate('/start'), 1000);
       } else {
         setToast({ message: data.message || 'Signup failed', type: 'error' });

@@ -21,7 +21,13 @@ const loginHandler = async (req: Request, res: Response) => {
     if (!isValid) return res.status(401).json({ message: 'Invalid credentials' });
 
     const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '1h' });
-    return res.status(200).json({ message: 'Login successful', token });
+    return res.status(200).json({
+      message: "Login successful",
+      token,
+      user: {
+        id: user.id,
+      },
+    });
   } catch (err) {
     console.error('Login error:', err);
     return res.status(500).json({ message: 'Internal server error' });

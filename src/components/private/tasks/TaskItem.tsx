@@ -17,7 +17,8 @@ export default function TaskItem({
       initial={{ opacity: 0, y: 5 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 5 }}
-      className="bg-[var(--color-card-bg)] border border-[var(--color-accent)] rounded-md p-4 mb-2 flex items-center justify-between shadow-sm"
+      className="bg-[var(--color-card-bg)] border border-transparent hover:border-orange-500 
+                 transition-colors rounded-md p-4 mb-2 flex items-center justify-between shadow-sm"
     >
       <div className="flex items-center gap-3">
         <input

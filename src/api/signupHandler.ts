@@ -9,7 +9,6 @@ const signupHandler = async (req: Request, res: Response) => {
 
   try {
     if (!email || !password) {
-      console.log("in here");
       return res.status(400).json({ message: 'Fill in the required fields' });
     }
 
@@ -21,7 +20,12 @@ const signupHandler = async (req: Request, res: Response) => {
       data: { email, password: hashedPassword }
     });
 
-    return res.status(201).json({ message: 'Signup successful', userId: newUser.id });
+    return res.status(201).json({
+      message: "Signup successful",
+      user: {
+        id: newUser.id,
+      },
+    });
   } catch (err) {
     console.error('Signup error:', err);
     return res.status(500).json({ message: 'Internal server error' });

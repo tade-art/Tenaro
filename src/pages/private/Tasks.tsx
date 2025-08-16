@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-import { v4 as uuid } from 'uuid';
+import { useEffect, useState } from 'react';
 import Navbar from '../../components/general/Navbar';
 import SettingsModal from '../../components/private/settings/SettingsModal';
 import FilterBar from '../../components/private/tasks/FilterBar';
@@ -16,64 +15,96 @@ export default function TasksPage() {
   const [filter, setFilter] = useState<'All' | 'Completed' | 'Incomplete'>('All');
   const [sort, setSort] = useState<'Title' | 'Priority'>('Title');
   const [showSettings, setShowSettings] = useState(false);
-  const didInitRef = useRef(false); 
 
   useEffect(() => {
-    if (didInitRef.current) return;
-    didInitRef.current = true;
-    try {
-      const raw = localStorage.getItem('tasks');
-      const parsed = raw ? JSON.parse(raw) : [];
-      if (Array.isArray(parsed)) {
-        const cleaned = parsed.filter(t => t && t.id && t.title && t.priority);
-        setTasks(cleaned);
+    const fetchTasks = async () => {
+      const id = localStorage.getItem('id');
+      if (!id) return;
+
+      try {
+        const res = await fetch(`/api/tasks/${id}`);
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          setTasks(data);
+        }
+      } catch (err) {
+        console.error('Error fetching tasks: ', err);
       }
-    } catch (err) {
-      console.error('[DEBUG] Failed to load tasks:', err);
-    }
+    };
+
+    fetchTasks();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]);
+  const handleAdd = async (data: Omit<Task, 'id' | 'completed'>) => {
+    const userId = localStorage.getItem('id');
+    if (!userId){
+      return;
+    }
 
-  const handleAdd = (data: Omit<Task, 'id' | 'completed'>) => {
-    const newTask: Task = {
-      ...data,
-      id: uuid(),
-      completed: false,
-    };
-    setTasks(prev => [...prev, newTask]);
+    try {
+      const res = await fetch('/api/tasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, userId }),
+      });
+
+      if (!res.ok) throw new Error('Failed to create task');
+
+      const newTask: Task = await res.json();
+      setTasks(prev => [...prev, newTask]);
+    } catch (err) {
+      console.error('Error in adding a task: ', err);
+    }
+
     setShowModal(false);
   };
 
-  const handleEdit = (updated: Task) => {
-    setTasks(prev => prev.map(t => (t.id === updated.id ? updated : t)));
+  const handleEdit = async (updated: Task) => {
+    try {
+      const res = await fetch(`/api/tasks/${updated.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updated),
+      });
+
+      if (!res.ok) throw new Error('Failed to update task');
+
+      const newTask: Task = await res.json();
+      setTasks(prev => prev.map(task => (task.id === newTask.id ? newTask : task)));
+    } catch (err) {
+      console.error('Error in editing a task: ', err);
+    }
+
     setEditTask(null);
   };
 
-  const handleDelete = (id: string) => {
-    setTasks(prev => prev.filter(t => t.id !== id));
+  const handleDelete = async (id: string) => {
+    try {
+      await fetch(`/api/tasks/${id}`, { method: 'DELETE' });
+      setTasks(prev => prev.filter(task => task.id !== id));
+    } catch (err) {
+      console.error('Error in deleting a task: ', err);
+    }
   };
 
-  const handleToggleComplete = (id: string) => {
-    setTasks(prev =>
-      prev.map(task =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
-    );
+  const handleToggleComplete = async (id: string) => {
+    const current = tasks.find(t => t.id === id);
+    if (!current) return;
+
+    const updated = { ...current, completed: !current.completed };
+    await handleEdit(updated);
   };
 
   const filteredTasks = tasks.filter(task =>
-    filter === 'All' ? true :
-    filter === 'Completed' ? task.completed :
-    !task.completed
+    filter === 'All' ||
+    (filter === 'Completed' && task.completed) ||
+    (filter === 'Incomplete' && !task.completed)
   );
 
   const sortedTasks = [...filteredTasks].sort((a, b) =>
     sort === 'Priority'
-      ? priorityOrder[a.priority] - priorityOrder[b.priority]
-      : a.title.localeCompare(b.title)
+      ? (priorityOrder[a.priority] ?? 4) - (priorityOrder[b.priority] ?? 4)
+      : (a.title ?? '').localeCompare(b.title ?? '')
   );
 
   return (
@@ -90,12 +121,9 @@ export default function TasksPage() {
               + Add Task
             </button>
           </div>
-          <FilterBar
-            filter={filter}
-            setFilter={setFilter}
-            sort={sort}
-            setSort={setSort}
-          />
+
+          <FilterBar filter={filter} setFilter={setFilter} sort={sort} setSort={setSort} />
+
           <TaskList
             tasks={sortedTasks}
             onEdit={setEditTask}
@@ -104,6 +132,7 @@ export default function TasksPage() {
           />
         </main>
       </div>
+
       {(showModal || editTask) && (
         <TaskModal
           onClose={() => {
@@ -114,6 +143,7 @@ export default function TasksPage() {
           existingTask={editTask}
         />
       )}
+
       {showSettings && <SettingsModal onClose={() => setShowSettings(false)} />}
     </>
   );
