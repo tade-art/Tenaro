@@ -1,31 +1,24 @@
-interface SettingsProps {
-  workDuration: number;
-  breakDuration: number;
-  setWorkDuration: (s: number) => void;
-  setBreakDuration: (s: number) => void;
+import React from 'react';
+
+interface Props {
+  setIsBreak: React.Dispatch<React.SetStateAction<boolean>>;
+  setSecondsLeft: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function Settings({ workDuration, breakDuration, setWorkDuration, setBreakDuration }: SettingsProps) {
+export default function Settings({ setIsBreak, setSecondsLeft }: Props) {
+  const switchMode = () => {
+    setIsBreak((prev) => {
+      const next = !prev;
+      setSecondsLeft(next ? 5 * 60 : 25 * 60);
+      return next;
+    });
+  };
+
   return (
-    <div className="flex gap-6 mt-6">
-      <div>
-        <label className="block text-sm mb-1 text-white">Work (min)</label>
-        <input
-          type="number"
-          value={workDuration}
-          onChange={(e) => setWorkDuration(+e.target.value)}
-          className="px-2 py-1 rounded bg-white/10 text-white w-20"
-        />
-      </div>
-      <div>
-        <label className="block text-sm mb-1 text-white">Break (min)</label>
-        <input
-          type="number"
-          value={breakDuration}
-          onChange={(e) => setBreakDuration(+e.target.value)}
-          className="px-2 py-1 rounded bg-white/10 text-white w-20"
-        />
-      </div>
+    <div className="mt-6">
+      <button onClick={switchMode} className="btn-nav">
+        Switch Mode
+      </button>
     </div>
   );
 }
