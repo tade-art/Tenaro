@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import createTask from './createTask';
+import { getDashboardData } from './dashboardData';
 import { deleteTask } from './deleteTask';
 import getTasks from './getTasks';
 import loginHandler from './loginHandler';
@@ -28,5 +29,10 @@ masterController.put('/tasks/:id', (req, res, next) => {
 
 masterController.get('/tasks/:id', getTasks);
 masterController.delete('/tasks/:id', deleteTask);
+
+//Dashboard
+masterController.get('/dashboard/:id', (req, res, next) => {
+  void getDashboardData(req, res).catch(next);
+});
 
 export default masterController;

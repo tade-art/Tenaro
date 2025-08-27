@@ -1,69 +1,91 @@
-# React + TypeScript + Vite
+# 📊 Task Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, minimalist task analytics dashboard built with **React + TypeScript** and powered by a **PostgreSQL + Prisma** backend. It visualizes task progress using animated charts like bar, line, and pie charts.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 📦 Total, Completed, and Incomplete task counters  
+- 📊 Bar chart showing distribution of task priorities (`high`, `medium`, `low`)  
+- 📉 Line chart of completed tasks over time  
+- 🥧 Pie chart comparing completed vs incomplete tasks  
+- 🎨 Modern UI with responsive layout  
+- 🌙 Full dark mode support  
+- ⚡️ Optimized with Vite + modular components  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠 Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **Frontend:** React, TypeScript, Tailwind CSS, Recharts  
+- **Backend:** Node-style modular API  
+- **ORM:** Prisma  
+- **Database:** PostgreSQL (NeonDB)  
+- **Tooling:** Vite, NPM  
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🚀 Getting Started
+
+### 1. Clone and install
+
+```
+git clone https://github.com/your-username/task-dashboard
+cd task-dashboard
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Setup environment variables
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Create a `.env` file:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+DATABASE_URL=your_neon_postgres_url
+JWT_TOKEN=your_jwt_token
+BACKEND_PORT=your_backend_port
+```
+
+### 3. Generate Prisma client & apply schema
+
+```
+npx prisma generate
+npx prisma migrate dev --name init
+```
+
+### 4. Start dev server
+
+```
+npm run dev
+npm run server
+```
+
+The app runs at [http://localhost:5173](http://localhost:5173)
+
+
+---
+
+---
+
+## 📦 Dependencies
+
+```
+"react": "^19.x",
+"recharts": "^2.8.x",
+"prisma": "^5.x",
+"tailwindcss": "^3.x",
+"typescript": "^5.x",
+"vite": "^5.x"
+```
+
+---
+
+## 🧑‍💻 Author
+
+Made by [@tade-art](https://github.com/tade-art)
+
+---
+
+## 📝 License
+
+MIT — free to use and modify for personal or commercial projects.
