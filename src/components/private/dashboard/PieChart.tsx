@@ -1,4 +1,3 @@
-// PieChart.tsx
 import React from 'react';
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 
@@ -40,9 +39,7 @@ const renderCustomLabel = ({
 
 const CustomPieChart: React.FC<Props> = ({ data, title = "Task Completion Ratio" }) => {
   const total = data.reduce((sum, d) => sum + d.value, 0);
-  const safeData = total === 0
-    ? [{ name: 'No Data', value: 1 }]
-    : data;
+  const safeData = total === 0 ? [{ name: 'No Data', value: 1 }] : data;
 
   return (
     <div className="bg-[var(--color-box)] border border-[var(--color-border)] rounded-xl shadow-md p-6">
@@ -56,7 +53,6 @@ const CustomPieChart: React.FC<Props> = ({ data, title = "Task Completion Ratio"
             labelLine={false}
             label={renderCustomLabel}
             outerRadius={100}
-            fill="#8884d8"
             dataKey="value"
           >
             {safeData.map((entry, index) => (
