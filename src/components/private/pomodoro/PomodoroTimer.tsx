@@ -10,7 +10,7 @@ export default function PomodoroTimer() {
   const [onBreak, setOnBreak] = useState(() => localStorage.getItem('onBreak') === 'true');
 
   const [timeLeft, setTimeLeft] = useState(() => {
-    const stored = parseInt(localStorage.getItem('timeLeft') || '0');
+    const stored = parseInt(localStorage.getItem('timeLeft') || '2500');
     return isNaN(stored) || stored > defaultDuration ? defaultDuration : stored;
   });
 
